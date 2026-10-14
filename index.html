@@ -1,58 +1,779 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nem a Pato</title>
-    <style>
-      :root {
-        --bg: #0f172a;
-        --panel: #111827;
-        --primary: #fbbf24;
-        --text: #e5e7eb;
-        --muted: #94a3b8;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>Quiz de Conhecimentos Gerais</title>
 
-      * { box-sizing: border-box; }
+<style>
+:root {
+  --bg: #0b1120;
+  --card: #151f32;
+  --card-hover: #1c2940;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: #7c5cff;
+  --border: #29364d;
+  --green: #34d399;
+}
 
-      body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: linear-gradient(135deg, #0f172a, #1e293b);
-        color: var(--text);
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-      }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-      .card {
-        width: min(90vw, 700px);
-        background: rgba(17, 24, 39, 0.9);
-        border: 1px solid rgba(251, 191, 36, 0.4);
-        border-radius: 18px;
-        padding: 40px 30px;
-        text-align: center;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-      }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
 
-      h1 {
-        margin: 0 0 16px;
-        color: var(--primary);
-        font-size: clamp(2rem, 5vw, 4rem);
-      }
+header {
+  background: linear-gradient(135deg, #171e37, #25194a);
+  padding: 35px 18px 30px;
+  border-bottom: 1px solid var(--border);
+}
 
-      p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 1.1rem;
-        line-height: 1.7;
-      }
-    </style>
-  </head>
-  <body>
-    <main class="card">
-      <h1>Nem a Pato</h1>
-      <p>Bem-vindo ao repositório inicial do projeto.</p>
-    </main>
-  </body>
+.container {
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  background: var(--accent);
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+}
+
+.logo h1 {
+  font-size: 20px;
+}
+
+.logo p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.hero h2 {
+  font-size: clamp(27px, 5vw, 40px);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.hero h2 span {
+  color: #a99aff;
+}
+
+.hero p {
+  color: #c3cbe0;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 550px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.stat {
+  padding: 15px;
+  background: #ffffff0b;
+  border: 1px solid #ffffff15;
+  border-radius: 14px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 23px;
+  margin-bottom: 5px;
+}
+
+.stat span {
+  color: #c3cbe0;
+  font-size: 12px;
+}
+
+main {
+  padding: 25px 16px 50px;
+}
+
+.search {
+  position: relative;
+  margin-bottom: 17px;
+}
+
+.search input {
+  width: 100%;
+  padding: 16px 16px 16px 45px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  outline: none;
+  color: white;
+  font-size: 15px;
+}
+
+.search input:focus {
+  border-color: var(--accent);
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 15px;
+  font-size: 18px;
+}
+
+.filters {
+  display: flex;
+  gap: 9px;
+  overflow-x: auto;
+  padding: 2px 0 14px;
+  margin-bottom: 15px;
+  scrollbar-width: thin;
+}
+
+.filter {
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: var(--card);
+  color: #cbd5e1;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.filter.active,
+.filter:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.list-header h3 {
+  font-size: 18px;
+}
+
+.list-header span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.question-list {
+  display: grid;
+  gap: 11px;
+}
+
+.question {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: border-color .2s, background .2s;
+}
+
+.question.open {
+  border-color: #7c5cff99;
+  background: #171f35;
+}
+
+.question-button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 17px 15px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.number {
+  width: 37px;
+  height: 37px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #7c5cff20;
+  color: #b6a8ff;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.question.open .number {
+  background: var(--accent);
+  color: white;
+}
+
+.question-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.question-title {
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+.category {
+  display: inline-block;
+  color: #b7aaff;
+  background: #7c5cff17;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  margin-top: 7px;
+}
+
+.arrow {
+  color: var(--muted);
+  font-size: 19px;
+  transition: transform .25s;
+}
+
+.question.open .arrow {
+  transform: rotate(180deg);
+  color: #b7aaff;
+}
+
+.answer {
+  display: none;
+  padding: 0 16px 18px 65px;
+  animation: show .2s ease;
+}
+
+.question.open .answer {
+  display: block;
+}
+
+.answer-label {
+  font-size: 11px;
+  color: var(--green);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.answer p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #d1d9e8;
+}
+
+.answer strong {
+  color: var(--green);
+}
+
+@keyframes show {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.empty {
+  text-align: center;
+  padding: 40px 15px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 15px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer strong {
+  color: #b7aaff;
+}
+
+@media (max-width: 480px) {
+  header { padding-top: 25px; }
+  .logo { margin-bottom: 24px; }
+  .stats { gap: 8px; }
+  .stat { padding: 12px 9px; }
+  .stat strong { font-size: 20px; }
+  .stat span { font-size: 10px; }
+  .question-button { padding: 14px 11px; gap: 10px; }
+  .answer { padding-left: 58px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <div class="logo-icon">🧠</div>
+      <div>
+        <h1>Quiz Geral</h1>
+        <p>Conhecimento em um só lugar</p>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h2>Teste seus conhecimentos <span>!</span></h2>
+      <p>
+        Explore 50 perguntas de conhecimentos gerais.
+        Clique em qualquer pergunta para descobrir a resposta
+        e aprender algo novo.
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong id="total">50</strong>
+        <span>Perguntas</span>
+      </div>
+      <div class="stat">
+        <strong id="opened">0</strong>
+        <span>Consultadas</span>
+      </div>
+      <div class="stat">
+        <strong id="categories">5</strong>
+        <span>Categorias</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="search">
+    <span class="search-icon">⌕</span>
+    <input
+      id="search"
+      type="search"
+      placeholder="Buscar uma pergunta..."
+      aria-label="Buscar perguntas"
+    >
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="filter active" data-category="Todas">🌎 Todas</button>
+    <button class="filter" data-category="Ciências">🔬 Ciências</button>
+    <button class="filter" data-category="Geografia">🌍 Geografia</button>
+    <button class="filter" data-category="História">📜 História</button>
+    <button class="filter" data-category="Cultura">📚 Cultura</button>
+    <button class="filter" data-category="Esportes">⚽ Esportes</button>
+  </div>
+
+  <div class="list-header">
+    <h3>📋 Perguntas</h3>
+    <span id="resultCount">50 resultados</span>
+  </div>
+
+  <div class="question-list" id="questionList"></div>
+
+  <footer>
+    Feito para quem gosta de aprender 🧠<br><br>
+    <strong>Quiz Geral</strong> · 50 perguntas de conhecimentos gerais
+  </footer>
+</main>
+
+<script>
+const questions = [
+  // CIÊNCIAS (1–10)
+  {
+    q: "Qual é o maior planeta do Sistema Solar?",
+    a: "Júpiter é o maior planeta do Sistema Solar.",
+    c: "Ciências"
+  },
+  {
+    q: "Quantos ossos tem, geralmente, o corpo humano adulto?",
+    a: "O corpo humano adulto geralmente tem 206 ossos.",
+    c: "Ciências"
+  },
+  {
+    q: "Qual é o símbolo químico da água?",
+    a: "H₂O, formada por dois átomos de hidrogênio e um de oxigênio.",
+    c: "Ciências"
+  },
+  {
+    q: "Qual órgão bombeia o sangue pelo corpo?",
+    a: "O coração bombeia o sangue por meio do sistema circulatório.",
+    c: "Ciências"
+  },
+  {
+    q: "Qual gás as plantas absorvem durante a fotossíntese?",
+    a: "As plantas absorvem dióxido de carbono (CO₂) durante a fotossíntese.",
+    c: "Ciências"
+  },
+  {
+    q: "Qual é o satélite natural da Terra?",
+    a: "A Lua é o satélite natural da Terra.",
+    c: "Ciências"
+  },
+  {
+    q: "A quantos graus Celsius a água congela em condições normais?",
+    a: "A água congela a 0 °C sob pressão atmosférica normal.",
+    c: "Ciências"
+  },
+  {
+    q: "Qual é o planeta conhecido como Planeta Vermelho?",
+    a: "Marte recebe esse apelido por causa da aparência avermelhada de sua superfície.",
+    c: "Ciências"
+  },
+  {
+    q: "Qual é a estrela mais próxima da Terra?",
+    a: "O Sol é a estrela mais próxima da Terra.",
+    c: "Ciências"
+  },
+  {
+    q: "Qual é o maior órgão do corpo humano?",
+    a: "A pele é o maior órgão do corpo humano.",
+    c: "Ciências"
+  },
+
+  // GEOGRAFIA (11–20)
+  {
+    q: "Qual é a capital do Brasil?",
+    a: "Brasília, localizada no Distrito Federal.",
+    c: "Geografia"
+  },
+  {
+    q: "Qual é o maior oceano do mundo?",
+    a: "O Oceano Pacífico é o maior oceano do planeta.",
+    c: "Geografia"
+  },
+  {
+    q: "Qual é o maior país do mundo em área territorial?",
+    a: "A Rússia é o maior país do mundo em área territorial.",
+    c: "Geografia"
+  },
+  {
+    q: "Em qual continente fica o Egito?",
+    a: "O Egito fica principalmente na África. A Península do Sinai está na Ásia.",
+    c: "Geografia"
+  },
+  {
+    q: "Qual é o rio com maior volume de água do mundo?",
+    a: "O Rio Amazonas é o rio com maior volume de água do mundo.",
+    c: "Geografia"
+  },
+  {
+    q: "Quantos continentes são geralmente considerados no modelo de seis continentes usado no Brasil?",
+    a: "Seis: América, África, Europa, Ásia, Oceania e Antártida.",
+    c: "Geografia"
+  },
+  {
+    q: "Qual é a capital da França?",
+    a: "Paris é a capital da França.",
+    c: "Geografia"
+  },
+  {
+    q: "Em qual continente fica o Japão?",
+    a: "O Japão fica na Ásia, no leste do continente.",
+    c: "Geografia"
+  },
+  {
+    q: "Qual é o deserto quente mais extenso do mundo?",
+    a: "O Deserto do Saara, localizado no norte da África.",
+    c: "Geografia"
+  },
+  {
+    q: "Qual é a montanha mais alta do mundo acima do nível do mar?",
+    a: "O Monte Everest, na cordilheira do Himalaia, com aproximadamente 8.849 metros.",
+    c: "Geografia"
+  },
+
+  // HISTÓRIA (21–30)
+  {
+    q: "Em que ano o Brasil declarou sua independência?",
+    a: "Em 1822, no dia 7 de setembro.",
+    c: "História"
+  },
+  {
+    q: "Quem foi o primeiro presidente do Brasil?",
+    a: "Marechal Deodoro da Fonseca, que assumiu em 1889.",
+    c: "História"
+  },
+  {
+    q: "Em que ano terminou a Segunda Guerra Mundial?",
+    a: "Em 1945.",
+    c: "História"
+  },
+  {
+    q: "Qual civilização construiu as famosas pirâmides de Gizé?",
+    a: "A civilização do Antigo Egito.",
+    c: "História"
+  },
+  {
+    q: "Quem foi conhecido como o Rei do Futebol?",
+    a: "Pelé, considerado um dos maiores jogadores de futebol da história.",
+    c: "História"
+  },
+  {
+    q: "Em que ano ocorreu a Proclamação da República no Brasil?",
+    a: "Em 1889, no dia 15 de novembro.",
+    c: "História"
+  },
+  {
+    q: "Quem chegou à América em uma expedição europeia em 1492?",
+    a: "Cristóvão Colombo liderou uma expedição espanhola que chegou ao Caribe em 1492. Povos indígenas já viviam nas Américas havia milhares de anos.",
+    c: "História"
+  },
+  {
+    q: "Qual era a língua predominante no Império Romano?",
+    a: "O latim era a língua predominante na parte ocidental do Império Romano. O grego era muito utilizado na parte oriental.",
+    c: "História"
+  },
+  {
+    q: "Quem foi o primeiro ser humano a pisar na Lua?",
+    a: "Neil Armstrong, astronauta da missão Apollo 11, em 1969.",
+    c: "História"
+  },
+  {
+    q: "Qual documento inglês de 1215 limitou os poderes do rei?",
+    a: "A Magna Carta, um documento importante para a história do constitucionalismo.",
+    c: "História"
+  },
+
+  // CULTURA (31–40)
+  {
+    q: "Quem escreveu Dom Quixote?",
+    a: "Miguel de Cervantes, escritor espanhol.",
+    c: "Cultura"
+  },
+  {
+    q: "Quantas cores tem o arco-íris na classificação tradicional?",
+    a: "Sete: vermelho, laranja, amarelo, verde, azul, anil e violeta.",
+    c: "Cultura"
+  },
+  {
+    q: "Qual é o idioma mais falado no Brasil?",
+    a: "O português é o idioma oficial e predominante no Brasil.",
+    c: "Cultura"
+  },
+  {
+    q: "Quem pintou a Mona Lisa?",
+    a: "Leonardo da Vinci, artista e inventor italiano.",
+    c: "Cultura"
+  },
+  {
+    q: "Qual instrumento musical tem teclas, pedais e cordas?",
+    a: "O piano.",
+    c: "Cultura"
+  },
+  {
+    q: "Qual é o nome do autor de O Pequeno Príncipe?",
+    a: "Antoine de Saint-Exupéry, escritor e aviador francês.",
+    c: "Cultura"
+  },
+  {
+    q: "Qual é a principal festa popular brasileira conhecida pelos desfiles de escolas de samba?",
+    a: "O Carnaval, celebrado de diferentes formas em várias regiões do Brasil.",
+    c: "Cultura"
+  },
+  {
+    q: "Qual é o nome da arte japonesa de dobrar papel?",
+    a: "Origami.",
+    c: "Cultura"
+  },
+  {
+    q: "Quem escreveu Romeu e Julieta?",
+    a: "William Shakespeare, dramaturgo inglês.",
+    c: "Cultura"
+  },
+  {
+    q: "Qual é o nome do prêmio mais famoso do cinema americano?",
+    a: "O Oscar, oficialmente conhecido como Academy Awards.",
+    c: "Cultura"
+  },
+
+  // ESPORTES (41–50)
+  {
+    q: "Quantos jogadores cada equipe tem em campo no futebol tradicional?",
+    a: "Onze jogadores por equipe, incluindo o goleiro.",
+    c: "Esportes"
+  },
+  {
+    q: "A cada quantos anos acontecem os Jogos Olímpicos de Verão, normalmente?",
+    a: "A cada quatro anos.",
+    c: "Esportes"
+  },
+  {
+    q: "Qual país venceu a primeira Copa do Mundo masculina de futebol, em 1930?",
+    a: "O Uruguai, que também foi o país anfitrião.",
+    c: "Esportes"
+  },
+  {
+    q: "Quantos pontos vale uma cesta comum dentro da linha de três pontos no basquete?",
+    a: "Dois pontos.",
+    c: "Esportes"
+  },
+  {
+    q: "Em qual esporte se utiliza uma raquete e uma peteca?",
+    a: "No badminton.",
+    c: "Esportes"
+  },
+  {
+    q: "Qual é a distância oficial de uma maratona?",
+    a: "42,195 quilômetros.",
+    c: "Esportes"
+  },
+  {
+    q: "Em qual esporte se disputa o torneio de Wimbledon?",
+    a: "No tênis.",
+    c: "Esportes"
+  },
+  {
+    q: "Qual é o nome do esporte praticado na Fórmula 1?",
+    a: "Automobilismo, na modalidade de corridas de monopostos.",
+    c: "Esportes"
+  },
+  {
+    q: "Quantos anéis aparecem no símbolo olímpico?",
+    a: "Cinco anéis entrelaçados.",
+    c: "Esportes"
+  },
+  {
+    q: "Qual é o objetivo principal do vôlei?",
+    a: "Fazer a bola tocar a quadra adversária e impedir que ela toque a própria quadra, respeitando as regras do jogo.",
+    c: "Esportes"
+  }
+];
+
+const list = document.getElementById("questionList");
+const search = document.getElementById("search");
+const resultCount = document.getElementById("resultCount");
+const openedDisplay = document.getElementById("opened");
+
+let activeCategory = "Todas";
+let openedQuestions = new Set();
+
+function renderQuestions() {
+  const term = search.value.trim().toLocaleLowerCase("pt-BR");
+
+  const filtered = questions
+    .map((item, index) => ({ ...item, index }))
+    .filter(item => {
+      const matchesCategory =
+        activeCategory === "Todas" ||
+        item.c === activeCategory;
+
+      const matchesSearch =
+        item.q.toLocaleLowerCase("pt-BR").includes(term) ||
+        item.a.toLocaleLowerCase("pt-BR").includes(term) ||
+        item.c.toLocaleLowerCase("pt-BR").includes(term);
+
+      return matchesCategory && matchesSearch;
+    });
+
+  resultCount.textContent =
+    `${filtered.length} ${filtered.length === 1 ? "resultado" : "resultados"}`;
+
+  if (filtered.length === 0) {
+    list.innerHTML = `
+      <div class="empty">
+        <div style="font-size:35px">🔎</div>
+        <strong>Nenhuma pergunta encontrada</strong>
+        <p>Tente outro termo ou escolha outra categoria.</p>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = filtered.map(item => `
+    <article class="question ${openedQuestions.has(item.index) ? "open" : ""}"
+      data-index="${item.index}">
+
+      <button
+        class="question-button"
+        aria-expanded="${openedQuestions.has(item.index)}"
+        aria-controls="answer-${item.index}"
+        onclick="toggleAnswer(${item.index})">
+
+        <span class="number">
+          ${String(item.index + 1).padStart(2, "0")}
+        </span>
+
+        <span class="question-info">
+          <span class="question-title">${item.q}</span>
+          <span class="category">${item.c}</span>
+        </span>
+
+        <span class="arrow">⌄</span>
+      </button>
+
+      <div class="answer" id="answer-${item.index}">
+        <div class="answer-label">✓ Resposta</div>
+        <p>${item.a}</p>
+      </div>
+    </article>
+  `).join("");
+}
+
+function toggleAnswer(index) {
+  if (openedQuestions.has(index)) {
+    openedQuestions.delete(index);
+  } else {
+    openedQuestions.add(index);
+  }
+
+  openedDisplay.textContent = openedQuestions.size;
+  renderQuestions();
+}
+
+document.querySelectorAll(".filter").forEach(button => {
+  button.addEventListener("click", () => {
+    activeCategory = button.dataset.category;
+
+    document.querySelectorAll(".filter").forEach(filter => {
+      filter.classList.toggle("active", filter === button);
+    });
+
+    renderQuestions();
+  });
+});
+
+search.addEventListener("input", renderQuestions);
+
+document.getElementById("total").textContent = questions.length;
+
+document.getElementById("categories").textContent =
+  new Set(questions.map(item => item.c)).size;
+
+renderQuestions();
+</script>
+
+</body>
 </html>
