@@ -1,0 +1,49 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="100" fill="#101D3A"/>
+
+  <!-- Círculos decorativos -->
+  <circle cx="420" cy="90" r="28" fill="#243B64"/>
+  <circle cx="90" cy="420" r="20" fill="#243B64"/>
+
+  <!-- Ponto de interrogação -->
+  <text x="385" y="175"
+        font-family="Arial, sans-serif"
+        font-size="120"
+        font-weight="bold"
+        fill="#FFFFFF"
+        text-anchor="middle">?</text>
+
+  <!-- Corpo do pato -->
+  <ellipse cx="245" cy="265" rx="115" ry="100" fill="#FFD447"/>
+
+  <!-- Asa -->
+  <ellipse cx="220" cy="285" rx="58" ry="42"
+           fill="#F5B92F" transform="rotate(-20 220 285)"/>
+
+  <!-- Cabeça -->
+  <circle cx="290" cy="165" r="77" fill="#FFD447"/>
+
+  <!-- Olho -->
+  <circle cx="315" cy="153" r="12" fill="#101D3A"/>
+  <circle cx="319" cy="149" r="4" fill="#FFFFFF"/>
+
+  <!-- Bico -->
+  <path d="M350 178 Q395 165 410 190 Q385 210 350 198 Z"
+        fill="#FF8A35"/>
+
+  <!-- Patas -->
+  <path d="M215 350 L205 375 L235 375 L245 350 Z" fill="#FF8A35"/>
+  <path d="M280 350 L275 375 L305 375 L305 350 Z" fill="#FF8A35"/>
+
+  <!-- Nome do aplicativo -->
+  <text x="256" y="435"
+        font-family="Arial, sans-serif"
+        font-size="53"
+        font-weight="900"
+        text-anchor="middle"
+        fill="#FFFFFF">Nem a Pato</text>
+
+  <!-- Detalhe amarelo -->
+  <rect x="155" y="451" width="202" height="8" rx="4" fill="#FFD447"/>
+</svg>
